@@ -23,3 +23,15 @@ export const colors = {
     _500: "#4C3D01",
   },
 };
+
+export const spacing = {
+  _1: '4px',
+  _3: '12px',
+  _4: '16px',
+};
+
+export const borderRadius = {
+  _1: '4px',
+  _2: '8px',
+  _3: '12px',
+};

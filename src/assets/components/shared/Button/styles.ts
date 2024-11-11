@@ -1,18 +1,44 @@
 import styled, { css } from "styled-components";
-import { colors } from "../../../../colors";
-import { ButtonProps } from "./Button";
+import { borderRadius, colors, spacing } from "../../../../colors";
+import { ReactNode } from "react";
+import { ButtonSize, ButtonVariant } from "../../types";
+
+export interface StyledButtonProps {
+  $variant: ButtonVariant;
+  $size: ButtonSize;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
+  disabled?: boolean;
+  children?: ReactNode | string;
+}
+
+export const StyledButton = styled.button<StyledButtonProps>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  ${({ $size }) =>  sizeStyles[$size]};
+  ${({ $variant }) => variants[$variant]};
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+`;
+
 
 const variants = {
   primary: css`
-    background-color: ${colors.primary300};
+    background-color: ${colors.PRIMARY._300};
     color: #ffffff;
 
     &:hover {
-      background-color: ${colors.primary400};
+      background-color: ${colors.PRIMARY._400};
     }
 
     & :active {
-      background-color: ${colors.primary500};
+      background-color: ${colors.PRIMARY._500};
       box-shadow: 4px 4px 13px 0px #0000000d inset;
     }
 
@@ -22,16 +48,16 @@ const variants = {
     }
   `,
   secondary: css`
-    border: 1px solid ${colors.primary300};
-    color: ${colors.primary300};
+    border: 1px solid ${colors.PRIMARY._300};
+    color: ${colors.PRIMARY._300};
     background-color: transparent;
 
     &:hover {
-      background-color: ${colors.primary50};
+      background-color: ${colors.PRIMARY._50};
     }
 
     & :active {
-      background-color: ${colors.primary100};
+      background-color: ${colors.PRIMARY._100};
       box-shadow: 4px 4px 13px 0px #0000000d inset;
     }
 
@@ -41,20 +67,20 @@ const variants = {
     }
   `,
   secondaryGrey: css`
-    border: 1px solid ${colors.neturals400};
-    color: ${colors.neturals400};
+    border: 1px solid ${colors.NETURALS._400};
+    color: ${colors.NETURALS._400};
     background-color: transparent;
 
     &:hover {
-      border: 1px solid ${colors.neturals400};
-      background-color: ${colors.neturals100};
-      color: ${colors.neturals300};
+      border: 1px solid ${colors.NETURALS._400};
+      background-color: ${colors.NETURALS._100};
+      color: ${colors.NETURALS._300};
     }
 
     & :active {
-      border: 1px solid ${colors.neturals400};
-      background-color: ${colors.neturals100};
-      color: ${colors.neturals400};
+      border: 1px solid ${colors.NETURALS._400};
+      background-color: ${colors.NETURALS._100};
+      color: ${colors.NETURALS._400};
       box-shadow: 4px 4px 13px 0px #0000000d inset;
     }
 
@@ -66,17 +92,17 @@ const variants = {
   `,
 
   tertiary: css`
-    color: ${colors.primary300};
+    color: ${colors.PRIMARY._300};
     background-color: transparent;
 
     &:hover {
-      background-color: ${colors.primary50};
-      color: ${colors.primary300};
+      background-color: ${colors.PRIMARY._50};
+      color: ${colors.PRIMARY._300};
     }
 
     & :active {
-      background-color: ${colors.primary100};
-      color: ${colors.primary300};
+      background-color: ${colors.PRIMARY._100};
+      color: ${colors.PRIMARY._300};
       box-shadow: 4px 4px 13px 0px #0000000d inset;
     }
 
@@ -86,18 +112,18 @@ const variants = {
     }
   `,
   tertiaryGrey: css`
-    color: ${colors.neturals400};
+    color: ${colors.NETURALS._400};
     background-color: transparent;
 
     &:hover {
       background-color: transparent;
-      color: ${colors.neturals300};
+      color: ${colors.NETURALS._300};
     }
 
     & :active {
-      background-color: ${colors.neturals100};
+      background-color: ${colors.NETURALS._100};
       box-shadow: 4px 4px 13px 0px #0000000d inset;
-      color: ${colors.neturals400};
+      color: ${colors.NETURALS._400};
     }
 
     &:disabled {
@@ -107,51 +133,38 @@ const variants = {
   `,
 };
 
-const sizeStyles = {
-  large: css`
-    width: Hug (80px) px;
-    height: Fixed (40px) px;
-    top: 140px;
-    left: 20px;
-    padding: 12px 16px 12px 16px;
-    gap: 4px;
-    border-radius: 4px 0px 0px 0px;
-    opacity: 0px;
-  `,
-  medium: css`
-    width: Hug (80px) px;
-    height: Fixed (36px) px;
-    top: 78px;
-    left: 20px;
-    padding: 10px 16px 10px 16px;
-    gap: 4px;
-    border-radius: 4px 0px 0px 0px;
-    opacity: 0px;
-  `,
-  small: css`
-    width: Hug (74px) px;
-    height: Fixed (32px) px;
-    top: 20px;
-    left: 20px;
-    padding: 9px 16px 9px 16px;
-    gap: 4px;
-    border-radius: 4px 0px 0px 0px;
-    opacity: 0px;
-  `,
+
+export function getCircularSize($size: ButtonSize):number {
+  return 0.8 * sizeDimensions[$size].height;
+}
+
+export const sizeDimensions = {
+  large: { width: 80, height: 40 },
+  medium: { width: 80, height: 36 },
+  small: { width: 74, height: 32 },
 };
 
-export const StyledButton = styled.button<ButtonProps>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  ${({ size }) => size && sizeStyles[size]};
-  ${({ variant }) => variant && variants[variant]};
 
-  &:disabled {
-    cursor: not-allowed;
-  }
-`;
-
+const sizeStyles = {
+  large: css`
+    width: ${sizeDimensions.large.width}px;
+    height: ${sizeDimensions.large.height}px;
+    padding: ${spacing._3} ${spacing._4} ${spacing._3} ${spacing._4};
+    gap: ${spacing._1};
+    border-radius: ${borderRadius._1};
+  `,
+  medium: css`
+    width: ${sizeDimensions.medium.width}px;
+    height: ${sizeDimensions.medium.height}px;
+    padding: ${spacing._3} ${spacing._4} ${spacing._3} ${spacing._4};
+    gap: ${spacing._1};
+    border-radius: ${borderRadius._1};
+  `,
+  small: css`
+     width: ${sizeDimensions.small.width}px;
+     height: ${sizeDimensions.small.height}px;
+    padding: ${spacing._3} ${spacing._4} ${spacing._3} ${spacing._4};
+    gap: ${spacing._1};
+    border-radius: ${borderRadius._1};
+  `,
+};

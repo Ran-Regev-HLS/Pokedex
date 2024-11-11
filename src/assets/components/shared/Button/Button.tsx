@@ -1,33 +1,38 @@
-import { StyledButton } from "./styles";
+import CircularProgress from '@mui/material/CircularProgress';
+import { getCircularSize, sizeDimensions, StyledButton, StyledButtonProps } from "./styles";
+import { ButtonSize } from '../../types';
 
-export interface ButtonProps {
-  variant:
-    | "primary"
-    | "secondary"
-    | "secondaryGrey"
-    | "tertiary"
-    | "tertiaryGrey";
-  size: "large" | "medium" | "small";
+
+
+export interface ButtonProps extends StyledButtonProps{
   isDisabled?: boolean;
+  isLoading?: boolean;
   onClick: () => void;
-  children?: React.ReactNode;
 }
 
 export default function Button({
-  variant,
-  size,
+  $variant,
+  $size,
   isDisabled = false,
+  isLoading = false,
+  startIcon,
+  endIcon,
   onClick,
   children,
 }: ButtonProps) {
+  
+
   return (
     <StyledButton
-      variant={variant}
-      size={size}
+    $variant={$variant}
+      $size={$size}
       onClick={onClick}
       disabled={isDisabled}
     >
-      {children}
+      {(startIcon && !isLoading) && startIcon}
+      {isLoading ? <CircularProgress color="inherit" size={getCircularSize($size)}/> : children}
+      {(endIcon && !isLoading) && endIcon}
     </StyledButton>
   );
 }
+
