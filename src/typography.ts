@@ -1,220 +1,143 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const typographyParametrs = {
-    fontFamily: {
-      primary: "'Mulish', sans-serif",
-    },
-    fontSize: {
-      xl: "28px",
-      lg: "24px",
-      md: "18px",
-      sm: "16px",
-      xs: "14px",
-      xxs: "12px",
-      xxxs: "11px",
-    },
-    fontWeight: {
-      regular: 400,
-      medium: 500,
-      bold: 700,
-    },
-    lineHeight: {
-      xl: "37px",
-      lg: "34px",
-      md: "27px",
-      sm: "24px",
-      xs: "22px",
-      xxs: "19px",
-      xxxs: "16px",
-    },
-  };
-
-
-interface TypographyProps {
-  fontFamily?: keyof typeof typographyParametrs.fontFamily;
-  fontSize?: keyof typeof typographyParametrs.fontSize;
-  fontWeight?: keyof typeof typographyParametrs.fontWeight;
-  lineHeight?: keyof typeof typographyParametrs.lineHeight;
-}
-
-export const Typography = styled.p<TypographyProps>`
-  font-family: ${({ theme, fontFamily = "primary" }) =>
-    theme.typography.fontFamily[fontFamily]};
-  font-size: ${({ theme, fontSize = "md" }) =>
-    theme.typography.fontSize[fontSize]};
-  font-weight: ${({ theme, fontWeight = "regular" }) =>
-    theme.typography.fontWeight[fontWeight]};
-  line-height: ${({ theme, lineHeight = "md" }) =>
-    theme.typography.lineHeight[lineHeight]};
+const ExtraLarge = css`
+  line-height: 37px;
+  font-size: 28px;
 `;
 
+const Large = css`
+  line-height: 34px;
+  font-size: 24px;
+`;
 
-// Headings
-export const ExtraLargeHeadingBold = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xl",
-  fontWeight: "bold",
-  lineHeight: "xl",
-})``;
+const Medium = css`
+  line-height: 27px;
+  font-size: 18px;
+`;
 
-export const ExtraLargeHeadingMedium = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xl",
-  fontWeight: "medium",
-  lineHeight: "xl",
-})``;
+const Small = css`
+  line-height: 24px;
+  font-size: 16px;
+`;
 
-export const LargeHeadingBold = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "lg",
-  fontWeight: "bold",
-  lineHeight: "lg",
-})``;
+const ExtraSmall = css`
+  line-height: 22px;
+  font-size: 14px;
+`;
 
-export const LargeHeadingMedium = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "lg",
-  fontWeight: "medium",
-  lineHeight: "lg",
-})``;
+const Caption = css`
+  line-height: 19px;
+  font-size: 12px;
+`;
 
-export const LargeHeadingRegular = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "lg",
-  fontWeight: "regular",
-  lineHeight: "lg",
-})``;
+const ExtraCaption = css`
+  line-height: 16px;
+  font-size: 11px;
+`;
 
-export const MediumHeadingBold = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "md",
-  fontWeight: "bold",
-  lineHeight: "md",
-})``;
+// Define font weights
+export const Regular = styled.p`
+  font-weight: 400;
+`;
 
-export const MediumHeadingMedium = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "md",
-  fontWeight: "medium",
-  lineHeight: "md",
-})``;
+export const MediumWeight = styled.p`
+  font-weight: 500;
+`;
 
-export const MediumHeadingRegular = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "md",
-  fontWeight: "regular",
-  lineHeight: "md",
-})``;
+export const Bold = styled.p`
+  font-weight: 700;
+`;
 
-// Subheadings
-export const SubHeadingBold = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "sm",
-  fontWeight: "bold",
-  lineHeight: "sm",
-})``;
+// Apply styles to components
+export const ExtraLargeHeadingBold = styled(Bold)`
+  ${ExtraLarge}
+`;
 
-export const SubHeadingMedium = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "sm",
-  fontWeight: "medium",
-  lineHeight: "sm",
-})``;
+export const ExtraLargeHeadingMedium = styled(MediumWeight)`
+  ${ExtraLarge}
+`;
 
-export const SubHeadingRegular = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "sm",
-  fontWeight: "regular",
-  lineHeight: "sm",
-})``;
+export const LargeHeadingBold = styled(Bold)`
+  ${Large}
+`;
 
-// Body Text
-export const BodyTextBold = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xs",
-  fontWeight: "bold",
-  lineHeight: "xs",
-})``;
+export const LargeHeadingMedium = styled(MediumWeight)`
+  ${Large}
+`;
 
-export const BodyTextMedium = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xs",
-  fontWeight: "medium",
-  lineHeight: "xs",
-})``;
+export const LargeHeadingRegular = styled(Regular)`
+  ${Large}
+`;
 
-export const BodyTextRegular = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xs",
-  fontWeight: "regular",
-  lineHeight: "xs",
-})``;
+export const MediumHeadingBold = styled(Bold)`
+  ${Medium}
+`;
 
-// Captions
-export const CaptionBold = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xxs",
-  fontWeight: "bold",
-  lineHeight: "xxs",
-})``;
+export const MediumHeadingMedium = styled(MediumWeight)`
+  ${Medium}
+`;
 
-export const CaptionMedium = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xxs",
-  fontWeight: "medium",
-  lineHeight: "xxs",
-})``;
+export const MediumHeadingRegular = styled(Regular)`
+  ${Medium}
+`;
 
-export const CaptionRegular = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xxs",
-  fontWeight: "regular",
-  lineHeight: "xxs",
-})``;
+export const SubHeadingBold = styled(Bold)`
+  ${Small}
+`;
 
-// Extra Small Text
-export const ExtraSmallBold = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xxxs",
-  fontWeight: "bold",
-  lineHeight: "xxxs",
-})``;
+export const SubHeadingMedium = styled(MediumWeight)`
+  ${Small}
+`;
 
-export const ExtraSmallMedium = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xxxs",
-  fontWeight: "medium",
-  lineHeight: "xxxs",
-})``;
+export const SubHeadingRegular = styled(Regular)`
+  ${Small}
+`;
 
-export const ExtraSmallRegular = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xxxs",
-  fontWeight: "regular",
-  lineHeight: "xxxs",
-})``;
+export const BodyTextBold = styled(Bold)`
+  ${ExtraSmall}
+`;
+
+export const BodyTextMedium = styled(MediumWeight)`
+  ${ExtraSmall}
+`;
+
+export const BodyTextRegular = styled(Regular)`
+  ${ExtraSmall}
+`;
+
+export const CaptionBold = styled(Bold)`
+  ${Caption}
+`;
+
+export const CaptionMedium = styled(MediumWeight)`
+  ${Caption}
+`;
+
+export const CaptionRegular = styled(Regular)`
+  ${Caption}
+`;
+
+export const ExtraSmallBold = styled(Bold)`
+  ${ExtraCaption}
+`;
+
+export const ExtraSmallMedium = styled(MediumWeight)`
+  ${ExtraCaption}
+`;
+
+export const ExtraSmallRegular = styled(Regular)`
+  ${ExtraCaption}
+`;
 
 // Button Text
-export const ButtonTextBig = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "sm",
-  fontWeight: "regular",
-  lineHeight: "sm",
-})``;
+export const ButtonTextBig = styled(Regular)`
+  ${Small}
+`;
 
-export const ButtonTextMedium = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "sm",
-  fontWeight: "regular",
-  lineHeight: "sm",
-})``;
+export const ButtonTextMedium = styled(Regular)`
+  ${Small}
+`;
 
-export const ButtonTextSmall = styled(Typography).attrs({
-  fontFamily: "primary",
-  fontSize: "xs",
-  fontWeight: "regular",
-  lineHeight: "xs",
-})``;
-
-
-  
+export const ButtonTextSmall = styled(Regular)`
+  ${ExtraSmall}
+`;
