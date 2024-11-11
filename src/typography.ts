@@ -36,15 +36,15 @@ const ExtraCaption = css`
 `;
 
 // Define font weights
-export const Regular = styled.p`
+export const Regular = styled.div`
   font-weight: 400;
 `;
 
-export const MediumWeight = styled.p`
+export const MediumWeight = styled.div`
   font-weight: 500;
 `;
 
-export const Bold = styled.p`
+export const Bold = styled.div`
   font-weight: 700;
 `;
 
