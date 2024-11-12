@@ -3,7 +3,7 @@ import { borderRadius, colors, spacing } from "../../../../colors";
 import { ReactNode } from "react";
 import { ButtonSize, ButtonVariant } from "../../types";
 
-export interface StyledButtonProps {
+export type StyledButtonProps = {
   $variant: ButtonVariant;
   $size: ButtonSize;
   startIcon?: ReactNode;
@@ -17,9 +17,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: 4px;
+  border-radius: ${borderRadius._1};
   cursor: pointer;
-  ${({ $size }) =>  sizeStyles[$size]};
+  ${({ $size }) =>  buttonSizeMap[$size]};
   ${({ $variant }) => variants[$variant]};
 
   &:disabled {
@@ -145,7 +145,7 @@ export const sizeDimensions = {
 };
 
 
-const sizeStyles = {
+const buttonSizeMap = {
   large: css`
     width: ${sizeDimensions.large.width}px;
     height: ${sizeDimensions.large.height}px;
