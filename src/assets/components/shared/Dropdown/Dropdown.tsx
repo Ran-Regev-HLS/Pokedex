@@ -39,7 +39,7 @@ function Dropdown<T>({
       disabled={isDisabled}
       options={items}
       getOptionLabel={getItemLabel}
-      onChange={(event, value) => handleChange(value)}
+      onChange={(_event, value) => handleChange(value)}
       sx = {dropdownStyles}
       renderInput={(params) => (
         <TextField {...params} label={placeholder} variant="outlined" />
