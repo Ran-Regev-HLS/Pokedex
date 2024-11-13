@@ -19,10 +19,6 @@ const dropdownStyles = {
     "&.Mui-disabled .MuiOutlinedInput-notchedOutline": {
       border: `1px solid ${colors.GENERAL.GREYCYANBLUE}`,
     },
-    ".MuiInputLabel-outlined": {
-      border: `1px solid ${colors.NETURALS._200}`,
-    },
-
   },
 };
 
