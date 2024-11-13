@@ -17,11 +17,11 @@ function App() {
     { id: 3, name: "Custom Item 3", icon: <AccountCircle /> },
   ];
 
-  const handleStringChange = (value: string) => {
+  const handleStringChange = (value: string ) => {
     console.log("Selected string:", value);
   };
 
-  const handleCustomChange = (value: CustomItem) => {
+  const handleCustomChange = (value: CustomItem ) => {
     console.log("Selected custom item:", value);
   };
 

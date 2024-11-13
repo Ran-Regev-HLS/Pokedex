@@ -1,7 +1,8 @@
 import { borderRadius, colors, spacing } from "../../../../colors";
 
-const dropdownStyles = {
-  baseStyle: {
+
+export const dropdownStyles = {
+    margin: `${spacing._6} 0 0 0`,
     width: "100%",
     height: "40px",
     gap: `${spacing._1}`,
@@ -19,9 +20,5 @@ const dropdownStyles = {
     "&.Mui-disabled .MuiOutlinedInput-notchedOutline": {
       border: `1px solid ${colors.GENERAL.GREYCYANBLUE}`,
     },
-  },
 };
 
-export const getDropdownSize = () => ({
-  ...dropdownStyles.baseStyle,
-});

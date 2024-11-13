@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import {
-  FormControl,
-  MenuItem,
-  Select,
-} from "@mui/material";
-import { getDropdownSize } from "./styles";
+import React from "react";
+import { Autocomplete, TextField } from "@mui/material";
+import { dropdownStyles } from "./styles";
 
 interface DropdownProps<T> {
   isDisabled?: boolean;
   items: T[];
-  onChange: (value: T) => void;
+  onChange: (value: T ) => void;
   getItemLabel?: (item: T) => string;
   renderItemContent?: (item: T) => React.ReactNode;
+  placeholder?: string;
 }
+
+
 
 function Dropdown<T>({
   onChange,
@@ -20,12 +19,11 @@ function Dropdown<T>({
   items,
   getItemLabel = (item) => String(item),
   renderItemContent,
+  placeholder = "Select an option",
 }: DropdownProps<T>) {
-  const [selectedValue, setSelectedValue] = useState<T | string>("");
 
-  const handleChange = (value: T | string) => {
-    setSelectedValue(value);
-    if (typeof value === "string") {
+  const handleChange = (value: T | null) => {
+    if (!value) {
       const setlectedItem = items.find((item) => getItemLabel(item) === value);
       if (setlectedItem) {
         onChange(setlectedItem);
@@ -37,19 +35,24 @@ function Dropdown<T>({
 
 
   return (
-    <FormControl fullWidth  disabled={isDisabled} >
-      <Select
-        value={selectedValue}
-        onChange={(event) => handleChange(event.target.value)}
-        sx={ getDropdownSize() }
-      >
-        {items.map((item) => (
-          <MenuItem key={getItemLabel(item)} value={getItemLabel(item)} >
-            {renderItemContent ? renderItemContent(item) : getItemLabel(item)}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <Autocomplete
+      disabled={isDisabled}
+      options={items}
+      getOptionLabel={getItemLabel}
+      onChange={(event, value) => handleChange(value)}
+      sx = {dropdownStyles}
+      renderInput={(params) => (
+        <TextField {...params} label={placeholder} variant="outlined" />
+      )}
+      renderOption={(props, option) => (
+        <li {...props} key = {getItemLabel(option)}>
+          {renderItemContent ? renderItemContent(option) : getItemLabel(option)}
+        </li>
+      )}
+      isOptionEqualToValue={(option, value) =>
+        getItemLabel(option) === getItemLabel(value)
+      }
+    />
   );
 }
 
