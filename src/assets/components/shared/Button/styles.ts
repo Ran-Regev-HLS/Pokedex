@@ -147,21 +147,18 @@ export const sizeDimensions = {
 
 const buttonSizeMap = {
   large: css`
-    width: ${sizeDimensions.large.width}px;
     height: ${sizeDimensions.large.height}px;
     padding: ${spacing._3} ${spacing._4} ${spacing._3} ${spacing._4};
     gap: ${spacing._1};
     border-radius: ${borderRadius._1};
   `,
   medium: css`
-    width: ${sizeDimensions.medium.width}px;
     height: ${sizeDimensions.medium.height}px;
     padding: ${spacing._3} ${spacing._4} ${spacing._3} ${spacing._4};
     gap: ${spacing._1};
     border-radius: ${borderRadius._1};
   `,
   small: css`
-     width: ${sizeDimensions.small.width}px;
      height: ${sizeDimensions.small.height}px;
     padding: ${spacing._3} ${spacing._4} ${spacing._3} ${spacing._4};
     gap: ${spacing._1};
