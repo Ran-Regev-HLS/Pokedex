@@ -1,9 +1,9 @@
 import { borderRadius, colors } from "../../../../colors";
 
-const textFieldStyles = {
+const textFieldBaseStyles = {
   baseStyle: {
     width: "400px",
-    
+
     "& .MuiInputBase-root.MuiInput-root": {
       borderColor: "none",
     },
@@ -11,6 +11,10 @@ const textFieldStyles = {
       borderRadius: borderRadius._1,
     },
   },
+};
+
+const textFieldStyles = {
+  ...textFieldBaseStyles,
   noState: {
     "& .MuiInputBase-root": {
       border: `1px solid ${colors.NETURALS._200}`,
@@ -30,12 +34,6 @@ const textFieldStyles = {
       backgroundColor: `${colors.GENERAL.WHITISHGREY}`,
     },
   },
-  afterSearch: {
-    "& .MuiInputBase-root": {
-      border: `1px solid ${colors.GENERAL.GREYISHCYAN}`,
-      color: `${colors.GENERAL.BLACKCYAN}`,
-    },
-  },
   hasValue: {
     "& .MuiInputBase-root": {
       border: `1px solid ${colors.NETURALS._500}`,
@@ -47,16 +45,14 @@ const textFieldStyles = {
 export const getTextFieldStyle = (
   isDisabled: boolean,
   hasValue: boolean,
-  afterSearch: boolean
 ) => ({
   ...textFieldStyles.baseStyle,
   ...(isDisabled ? textFieldStyles.disabled : {}),
-  ...(afterSearch && !isDisabled ? textFieldStyles.afterSearch : {}),
-  ...(hasValue && !afterSearch && !isDisabled ? textFieldStyles.hasValue : {}),
-  ...(!hasValue && !afterSearch && !isDisabled ? textFieldStyles.noState : {}),
+  ...(hasValue && !isDisabled ? textFieldStyles.hasValue : {}),
+  ...(!hasValue && !isDisabled ? textFieldStyles.noState : {}),
 });
 
-const iconButtonStyles = {
+const textfieldIconButtonStyles = {
   baseStyle: {
     color: `${colors.GENERAL.GREYISHCYAN}`,
   },
@@ -77,18 +73,13 @@ const iconButtonStyles = {
   hasValue: {
     color: `${colors.GENERAL.BLACKCYAN}`,
   },
-  afterSearch: {
-    color: `${colors.GENERAL.BLACKCYAN}`,
-  },
 };
 
 export const getIconButtonStyle = (
   isDisabled: boolean,
   hasValue: boolean,
-  afterSearch: boolean
 ) => ({
-  ...iconButtonStyles.baseStyle,
-  ...(isDisabled ? iconButtonStyles.disabled : iconButtonStyles.hover),
-  ...(afterSearch && !isDisabled ? iconButtonStyles.afterSearch : {}),
-  ...(hasValue && !afterSearch && !isDisabled ? iconButtonStyles.hasValue : {}),
+  ...textfieldIconButtonStyles.baseStyle,
+  ...(isDisabled ? textfieldIconButtonStyles.disabled : textfieldIconButtonStyles.hover),
+  ...(hasValue && !isDisabled ? textfieldIconButtonStyles.hasValue : {}),
 });
