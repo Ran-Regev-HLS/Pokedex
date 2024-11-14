@@ -17,6 +17,9 @@ export const dropdownStyles = {
       border: `1px solid ${colors.NETURALS._500}`,
       color: `${colors.GENERAL.DARKGREYCYAN}`,
     },
+    "&.Mui-focused label": {
+      color: `${colors.GENERAL.DARKGREYCYAN}`,
+    },
     "&.Mui-disabled .MuiOutlinedInput-notchedOutline": {
       border: `1px solid ${colors.GENERAL.GREYCYANBLUE}`,
     },

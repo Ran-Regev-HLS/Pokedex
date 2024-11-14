@@ -1,17 +1,17 @@
 import React from "react";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, SxProps, TextField, Theme } from "@mui/material";
 import { dropdownStyles } from "./styles";
 
 interface DropdownProps<T> {
   isDisabled?: boolean;
   items: T[];
-  onChange: (value: T ) => void;
+  onChange: (value: T) => void;
   getItemLabel?: (item: T) => string;
   renderItemContent?: (item: T) => React.ReactNode;
+  getItemId?: (item: T) => string;
   placeholder?: string;
+  style? : SxProps<Theme>;
 }
-
-
 
 function Dropdown<T>({
   onChange,
@@ -19,20 +19,20 @@ function Dropdown<T>({
   items,
   getItemLabel = (item) => String(item),
   renderItemContent,
+  getItemId,
   placeholder = "Select an option",
+  style,
 }: DropdownProps<T>) {
-
   const handleChange = (value: T | null) => {
-    if (!value) {
-      const setlectedItem = items.find((item) => getItemLabel(item) === value);
-      if (setlectedItem) {
-        onChange(setlectedItem);
+    if (value === null) {
+      const selectedItem = items.find((item) => getItemLabel(item) === value);
+      if (selectedItem) {
+        onChange(selectedItem);
       }
     } else {
       onChange(value);
     }
   };
-
 
   return (
     <Autocomplete
@@ -40,12 +40,12 @@ function Dropdown<T>({
       options={items}
       getOptionLabel={getItemLabel}
       onChange={(_event, value) => handleChange(value)}
-      sx = {dropdownStyles}
+      sx={{...dropdownStyles, ...style }}
       renderInput={(params) => (
         <TextField {...params} label={placeholder} variant="outlined" />
       )}
-      renderOption={(props, option) => (
-        <li {...props} key = {getItemLabel(option)}>
+      renderOption={(props, option, { index }) => (
+        <li {...props} key={getItemId ? getItemId(option) : `${index}-${getItemLabel(option)}` }>
           {renderItemContent ? renderItemContent(option) : getItemLabel(option)}
         </li>
       )}
