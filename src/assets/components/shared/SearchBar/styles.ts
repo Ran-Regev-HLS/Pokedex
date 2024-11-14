@@ -1,7 +1,6 @@
 import { borderRadius, colors } from "../../../../colors";
 
 const textFieldBaseStyles = {
-  baseStyle: {
     width: "400px",
 
     "& .MuiInputBase-root.MuiInput-root": {
@@ -10,11 +9,9 @@ const textFieldBaseStyles = {
     "& .MuiInputBase-root": {
       borderRadius: borderRadius._1,
     },
-  },
 };
 
 const textFieldStyles = {
-  ...textFieldBaseStyles,
   noState: {
     "& .MuiInputBase-root": {
       border: `1px solid ${colors.NETURALS._200}`,
@@ -46,7 +43,7 @@ export const getTextFieldStyle = (
   isDisabled: boolean,
   hasValue: boolean,
 ) => ({
-  ...textFieldStyles.baseStyle,
+  ...textFieldBaseStyles,
   ...(isDisabled ? textFieldStyles.disabled : {}),
   ...(hasValue && !isDisabled ? textFieldStyles.hasValue : {}),
   ...(!hasValue && !isDisabled ? textFieldStyles.noState : {}),

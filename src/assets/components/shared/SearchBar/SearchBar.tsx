@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import { getIconButtonStyle, getTextFieldStyle } from "./styles";
 import { IconButton, TextField } from "@mui/material";
@@ -37,6 +37,31 @@ function SearchBar({
     setSearchTerm(searchValue);
     onChangeDebounce(searchValue);
   };
+  const setInputSlotProps = () => {
+    return(
+      {startAdornment: startIcon && (
+        <InputAdornment position="start">
+          <IconButton
+            disableRipple
+            sx={getIconButtonStyle(isDisabled, !!searchTerm)}
+          >
+            {renderIcon(startIcon)}
+          </IconButton>
+        </InputAdornment>
+      ),
+      endAdornment: endIcon && (
+        <InputAdornment position="end">
+          <IconButton
+            disableRipple = {!searchTerm}
+            onClick={handleEndIconClick}
+            sx={getIconButtonStyle(isDisabled, !!searchTerm)}
+          >
+            {renderIcon(endIcon)}
+          </IconButton>
+        </InputAdornment>
+      ),}
+    )
+  }
 
   const handleEndIconClick = () => {
     if (endIcon?.onClick) {
@@ -66,27 +91,7 @@ function SearchBar({
       slotProps={{
         input: {
           disableUnderline: true,
-          startAdornment: startIcon && (
-            <InputAdornment position="start">
-              <IconButton
-                disableRipple
-                sx={getIconButtonStyle(isDisabled, !!searchTerm)}
-              >
-                {renderIcon(startIcon)}
-              </IconButton>
-            </InputAdornment>
-          ),
-          endAdornment: endIcon && (
-            <InputAdornment position="end">
-              <IconButton
-                disableRipple = {!searchTerm}
-                onClick={handleEndIconClick}
-                sx={getIconButtonStyle(isDisabled, !!searchTerm)}
-              >
-                {renderIcon(endIcon)}
-              </IconButton>
-            </InputAdornment>
-          ),
+          ...setInputSlotProps()
         },
       }}
     />
@@ -94,3 +99,4 @@ function SearchBar({
 }
 
 export default SearchBar;
+
