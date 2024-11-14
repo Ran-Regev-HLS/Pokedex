@@ -22,6 +22,16 @@ export const colors = {
     _400: "#CCA204",
     _500: "#4C3D01",
   },
+  GENERAL:{
+    DARKGREYCYAN: "#2d3033",
+    GREYCYANBLUE: "#c7cdd3",
+    LIGHTGREY: "#f2f5f7",
+    GREYISHCYAN: "#929aa3",
+    BLACKCYAN: "#0b0c0d",
+    WHITISHGREY: "#f2f5f7",
+    
+    
+  }
 };
 
 export const spacing = {
