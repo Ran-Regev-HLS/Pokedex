@@ -1,57 +1,60 @@
-import React from "react";
-import { Autocomplete, SxProps, TextField, Theme } from "@mui/material";
-import { dropdownStyles } from "./styles";
+import { Autocomplete, Box, SxProps, TextField, Theme } from "@mui/material";
+import {
+  dropdownStyles,
+  itemContainerStyles,
+  logoContainerStyles,
+  StyledIcon,
+} from "./styles";
+import { HTMLAttributes } from "react";
 
-interface DropdownProps<T> {
+type itemType = {
+  id: string;
+  label: string;
+  icon?: string;
+  additionalData?: string;
+};
+
+interface DropdownProps {
   isDisabled?: boolean;
-  items: T[];
-  onChange: (value: T) => void;
-  getItemLabel?: (item: T) => string;
-  renderItemContent?: (item: T) => React.ReactNode;
-  getItemId?: (item: T) => string;
+  items: itemType[];
+  onChange: (value: itemType | null) => void;
   placeholder?: string;
-  style? : SxProps<Theme>;
+  style?: SxProps<Theme>;
 }
 
-function Dropdown<T>({
+function Dropdown({
   onChange,
   isDisabled = false,
   items,
-  getItemLabel = (item) => String(item),
-  renderItemContent,
-  getItemId,
   placeholder = "Select an option",
   style,
-}: DropdownProps<T>) {
-  const handleChange = (value: T | null) => {
-    if (value === null) {
-      const selectedItem = items.find((item) => getItemLabel(item) === value);
-      if (selectedItem) {
-        onChange(selectedItem);
-      }
-    } else {
-      onChange(value);
-    }
-  };
+}: DropdownProps) {
+  function renderItem(props: HTMLAttributes<HTMLLIElement>, option: itemType) {
+    return (
+      <li {...props} key={option.id}>
+        <Box sx={itemContainerStyles}>
+          <Box sx={logoContainerStyles}>
+            {option.icon && <StyledIcon src={option.icon} alt={option.label} />}
+            {option.label}
+          </Box>
+          {option.additionalData && <div>{option.additionalData}</div>}
+        </Box>
+      </li>
+    );
+  }
 
   return (
     <Autocomplete
       disabled={isDisabled}
       options={items}
-      getOptionLabel={getItemLabel}
-      onChange={(_event, value) => handleChange(value)}
-      sx={{...dropdownStyles, ...style }}
+      getOptionLabel={(item) => item.label}
+      onChange={(_event, value) => onChange(value)}
+      sx={{ ...dropdownStyles, ...style }}
       renderInput={(params) => (
         <TextField {...params} label={placeholder} variant="outlined" />
       )}
-      renderOption={(props, option, { index }) => (
-        <li {...props} key={getItemId ? getItemId(option) : `${index}-${getItemLabel(option)}` }>
-          {renderItemContent ? renderItemContent(option) : getItemLabel(option)}
-        </li>
-      )}
-      isOptionEqualToValue={(option, value) =>
-        getItemLabel(option) === getItemLabel(value)
-      }
+      renderOption={(props, option) => renderItem(props, option)}
+      isOptionEqualToValue={(option, value) => option.id === value.id}
     />
   );
 }
